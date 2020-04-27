@@ -1,0 +1,17 @@
+{
+  "name": "mongo_sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^7.1.2",
+    "mongoose": "^5.9.10",
+    "nodemon": "^2.0.3"
+  }
+}
