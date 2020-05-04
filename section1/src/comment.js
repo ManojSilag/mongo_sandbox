@@ -3,14 +3,12 @@ const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
   content: String,
-  user: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "user",
-    },
-  ],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+  },
 });
 
-const BlogPost = mongoose.model("Comment", CommentSchema);
+const BlogPost = mongoose.model("comment", CommentSchema);
 
 module.exports = BlogPost;
