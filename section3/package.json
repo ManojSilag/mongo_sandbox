@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec 'mocha --recursive -R min'",
-    "start": "node index.js",
-    "dev": "nodemon index.js -w"
+    "test": "env NODE_ENV=test nodemon --exec 'mocha --recursive -R min'",
+    "start": "env NODE_ENV=prod  node index.js",
+    "dev": "env NODE_ENV=dev  nodemon index.js -w"
   },
   "keywords": [],
   "author": "",
