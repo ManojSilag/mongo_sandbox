@@ -47,4 +47,29 @@ describe("Driver controller", () => {
         });
     });
   });
+
+  it("GET to /api/drivers/ find drivers in near location", (done) => {
+    const mumbaidriver = new Driver({
+      email: "mumbaidriver@123",
+      geometry: { type: "Point", coordinates: [-122.4759902, 47.6147628] },
+      driving: false,
+    });
+    const Delhidriver = new Driver({
+      email: "Delhidriver@123",
+      geometry: { type: "Point", coordinates: [-80.253, 25.791] },
+      driving: false,
+    });
+
+    Promise.all([mumbaidriver.save(), Delhidriver.save()]).then(() => {
+      request(app)
+        .get("/api/drivers?lng=-80&lat=25")
+        .end((err, response) => {
+          console.log("dev: response", response.body.length);
+          // assert(response.body.length === 1);
+          // assert(response.body[0].obj.email === "mumbaidriver@123");
+
+          done();
+        });
+    });
+  });
 });

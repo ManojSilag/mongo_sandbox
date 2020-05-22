@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 if (process.env.NODE_ENV !== "test") {
   mongoose.connect("mongodb://localhost:27017/olaa", {
     useNewUrlParser: true,
+    useCreateIndex: true,
     useUnifiedTopology: true,
   });
 }

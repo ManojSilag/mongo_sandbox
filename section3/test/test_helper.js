@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 
 before((done) => {
   mongoose.connect("mongodb://localhost:27017/olaa_test", {
-    useNewUrlParser: true,  useUnifiedTopology: true 
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
   });
   mongoose.connection
     .once("open", () => done())
@@ -13,7 +15,9 @@ before((done) => {
 
 beforeEach((done) => {
   const { drivers } = mongoose.connection.collections;
-  drivers.drop()
+  drivers
+    .drop()
+    .then(() => drivers.ensureIndex({ "geometry.coordinates": "2dsphere" }))
     .then(() => done())
     .catch(() => done());
 });

@@ -9,4 +9,7 @@ module.exports = (app) => {
 
   app.delete("/api/drivers/:id", DriverController.delete)
 
+  app.get("/api/drivers", DriverController.index);
+
+
 };

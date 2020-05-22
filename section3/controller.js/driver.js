@@ -5,6 +5,33 @@ module.exports = {
     res.send({ hi: "there" });
   },
 
+  index(req, res, next) {
+    const { lng, lat } = req.query;
+
+    Driver.aggregate([
+      {
+        $geoNear: {
+          near: {
+            type: "Point",
+            coordinates: [parseFloat(lng), parseFloat(lat)],
+          },
+           distanceField: "distance",
+          maxDistance: 2,
+          query: { type: "public" },
+          // includeLocs: "dist.location",
+          spherical: true,
+        },
+      },
+    ])
+   .then((drivers) => res.send(drivers))
+      .catch(next);
+
+    // Driver.geoNear(
+    //   { type: "Point", coordinates: [parseFloat(lng), parseFloat(lat)] },
+    //   { spherical: true, maxDistance: 200000 }
+    // )
+  },
+
   create(req, res, next) {
     const driverProps = req.body;
     Driver.create(driverProps)
@@ -30,5 +57,4 @@ module.exports = {
       .then((driver) => res.status(204).send(driver))
       .catch(next);
   },
-
 };
